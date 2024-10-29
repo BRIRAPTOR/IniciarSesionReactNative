@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import {Text, View, StyleSheet, Image, TouchableOpacity, Alert, TextInput, Platform} from 'react-native';
+import { Text, View, StyleSheet, Image, TouchableOpacity, Alert, TextInput, Platform } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import * as Sharing from 'expo-sharing';
 
 const App = () => {
   const [imageUri, setImageUri] = useState('https://static.vecteezy.com/system/resources/previews/005/005/840/non_2x/user-icon-in-trendy-flat-style-isolated-on-grey-background-user-symbol-for-your-web-site-design-logo-app-ui-illustration-eps10-free-vector.jpg');
@@ -15,7 +16,7 @@ const App = () => {
       quality: 1,
     });
 
-    if (!result.canceled && result.assets.length > 0) {
+    if (!result.cancelled && result.assets.length > 0) {
       setImageUri(result.assets[0].uri);
     }
   };
@@ -28,7 +29,7 @@ const App = () => {
       quality: 1,
     });
 
-    if (!result.canceled && result.assets.length > 0) {
+    if (!result.cancelled && result.assets.length > 0) {
       setImageUri(result.assets[0].uri);
     }
   };
@@ -48,6 +49,15 @@ const App = () => {
       }
     }
   };
+
+  const shareImage = async () => {
+    if (!(await Sharing.isAvailableAsync())) {
+      alert(`Uh oh, sharing isn't available on your platform`);
+      return;
+    }
+    await Sharing.shareAsync(imageUri);
+  };
+
   return (
       <View style={styles.container}>
         <Image source={{ uri: imageUri }} style={styles.image} />
@@ -72,6 +82,9 @@ const App = () => {
         />
         <TouchableOpacity onPress={handleLogin}>
           <Text>Aceptar</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={shareImage}>
+          <Text>Compartir Imagen</Text>
         </TouchableOpacity>
       </View>
   );
