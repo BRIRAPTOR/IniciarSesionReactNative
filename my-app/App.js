@@ -59,57 +59,56 @@ const App = () => {
   };
 
   return (
-      <View style={styles.container}>
+    <View style={styles.container}>
+      <View style={styles.subcontainer}>
         <Image source={{ uri: imageUri }} style={styles.image} />
-        <TouchableOpacity onPress={pickImage}>
-          <Text>Cambiar Imagen de Perfil</Text>
+        <TouchableOpacity onPress={pickImage} style={styles.button3}>
+          <Text style={styles.buttontext}>Cambiar Imagen de Perfil</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={takePhoto}>
-          <Text>Tomar Foto</Text>
+        <TouchableOpacity onPress={takePhoto} style={styles.button2}>
+          <Text style={styles.buttontext}>Tomar Foto</Text>
         </TouchableOpacity>
-        <TextInput
+
+        <View style={styles.subcontainer2}>
+          <TextInput
             placeholder="Usuario"
             value={username}
             onChangeText={setUsername}
             style={styles.input}
-        />
-        <TextInput
+          />
+          <TextInput
             placeholder="Contraseña"
             value={password}
             onChangeText={setPassword}
             secureTextEntry
             style={styles.input}
-        />
-        <TouchableOpacity onPress={handleLogin}>
-          <Text>Aceptar</Text>
+          />
+        </View>
+        <TouchableOpacity onPress={handleLogin} style={styles.button2}>
+          <Text style={styles.buttontext}>Aceptar</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={shareImage}>
-          <Text>Compartir Imagen</Text>
+        <TouchableOpacity onPress={shareImage} style={styles.button2}>
+          <Text style={styles.buttontext}>Compartir Imagen</Text>
         </TouchableOpacity>
       </View>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  container: { flex: 1, backgroundColor: '#000000', alignItems: 'center', justifyContent: 'center' },
+  subcontainer2: { marginTop: 25, marginBottom: 15 },
+  subcontainer: { borderColor: '#294AEC', backgroundColor: '#1E1E1F', borderWidth: 2, alignItems: 'center', justifyContent: 'center', padding: 30, borderRadius: 50 },
   image: {
     width: 100,
     height: 100,
     borderRadius: 50,
     marginBottom: 20,
   },
-  input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    margin: 12,
-    padding: 10,
-    width: '80%',
-  },
+  input: { padding: 5, height: 25, width: 200, borderRadius: 5, backgroundColor: '#FFFFFF', color: '#000000', marginTop: 5, marginBottom: 10, borderColor: '#5975FE', borderWidth: 2 },
+  button2: { height: 30, width: 120, color: '#FFFFFF', backgroundColor: '#191970', borderRadius: 8, borderColor: '#5975FE', borderWidth: 1.5, justifyContent: 'center', alignItems: 'center' },
+  button3: { height: 30, width: 150, color: '#FFFFFF', backgroundColor: '#191970', borderRadius: 8, borderColor: '#5975FE', borderWidth: 1.5, justifyContent: 'center', alignItems: 'center' },
+  buttontext: { color: '#E0FFFF', fontSize: 12, justifyContent: 'center' }
 });
 
 export default App;
